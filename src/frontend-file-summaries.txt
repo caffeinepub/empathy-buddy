@@ -1,0 +1,17 @@
+{
+  "frontend/src/App.tsx": "Main application component with TanStack Router setup, defining routes for onboarding, home, express, listen, and archive pages with a shared layout including header and footer.",
+  "frontend/src/components/Header.tsx": "Simple header component displaying the Empathy Buddy logo and name.",
+  "frontend/src/components/Footer.tsx": "Footer component with attribution and link to caffeine.ai.",
+  "frontend/src/components/ExpressTab.tsx": "Tab component for recording and uploading voice expressions with gentle guidance message, required empathy request selection (Presence, Reflection, or Needs Guessing framed as requests to the listener), moderation flow, and automatic navigation to home after successful submission.",
+  "frontend/src/components/ListenTab.tsx": "Listen tab component that increments playback count only after successful full playback completion, displays the three-playback limit message only after the third completed playback, shows response controls after first completed playback, and maintains proper state management for the listen flow without premature error rendering.",
+  "frontend/src/components/AudioRecorder.tsx": "Reusable audio recording component with record/stop/play/re-record controls that preserves the original audio blob throughout the recording and preview flow, ensuring the same blob is passed to parent components for upload without re-encoding.",
+  "frontend/src/components/AudioPlayer.tsx": "Audio playback component that assumes audio is playable on load, only displays error messages after user-initiated playback attempts fail, maintains persistent loaded state after successful playback, and uses callback refs to prevent unnecessary re-renders.",
+  "frontend/src/hooks/useQueries.ts": "React Query hooks for all backend operations including expression upload with empathy type, moderation, assignment, and response submission.",
+  "frontend/src/lib/utils.ts": "Utility function for merging Tailwind CSS classes using clsx and tailwind-merge.",
+  "frontend/src/index.css": "Global styles with OKLCH color palette and btn-action component class that enforces black text on pure white background with visible shadows using !important declarations to override default button styles, ensuring consistent visibility in both light and dark modes with enhanced contrast against white surroundings.",
+  "frontend/src/pages/Onboarding.tsx": "Onboarding screen with language selection dropdown and brief explanation of the empathy ritual, navigating to home screen on continue.",
+  "frontend/src/pages/Home.tsx": "Home screen with central question and three navigation buttons (Express, Listen, Archive) serving as the main routing hub.",
+  "frontend/src/pages/Express.tsx": "Express page that integrates the fully functional ExpressTab component with back navigation to home, providing complete audio recording, upload, and moderation functionality.",
+  "frontend/src/pages/Listen.tsx": "Listen page that integrates the fully functional ListenTab component with back navigation to home, providing complete audio playback, assignment, and response functionality.",
+  "frontend/src/pages/Archive.tsx": "Placeholder page for Archive view with back navigation to home."
+}

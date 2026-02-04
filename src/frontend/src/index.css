@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 0.75rem;
+        /* Warm, empathetic purple-blue palette with enhanced contrast */
+        --background: 0.99 0 0;
+        --foreground: 0.15 0 0;
+        --card: 1 0 0;
+        --card-foreground: 0.15 0 0;
+        --popover: 1 0 0;
+        --popover-foreground: 0.15 0 0;
+        /* Deeper purple primary for better contrast */
+        --primary: 0.50 0.20 285;
+        --primary-foreground: 0.99 0 0;
+        /* Enhanced secondary with better visibility */
+        --secondary: 0.88 0.05 285;
+        --secondary-foreground: 0.20 0 0;
+        --muted: 0.94 0.02 285;
+        --muted-foreground: 0.45 0 0;
+        --accent: 0.90 0.06 285;
+        --accent-foreground: 0.20 0 0;
+        --destructive: 0.55 0.24 25;
+        --destructive-foreground: 0.99 0 0;
+        --border: 0.88 0.02 285;
+        --input: 0.88 0.02 285;
+        --ring: 0.50 0.20 285;
+        --chart-1: 0.6 0.2 285;
+        --chart-2: 0.65 0.18 240;
+        --chart-3: 0.7 0.15 200;
+        --chart-4: 0.75 0.12 160;
+        --chart-5: 0.8 0.1 120;
+    }
+
+    .dark {
+        --background: 0.12 0 0;
+        --foreground: 0.96 0 0;
+        --card: 0.16 0 0;
+        --card-foreground: 0.96 0 0;
+        --popover: 0.18 0 0;
+        --popover-foreground: 0.96 0 0;
+        /* Brighter purple for dark mode with strong contrast */
+        --primary: 0.68 0.22 285;
+        --primary-foreground: 0.10 0 0;
+        --secondary: 0.28 0.04 285;
+        --secondary-foreground: 0.96 0 0;
+        --muted: 0.24 0.02 285;
+        --muted-foreground: 0.68 0 0;
+        --accent: 0.32 0.05 285;
+        --accent-foreground: 0.96 0 0;
+        --destructive: 0.62 0.24 25;
+        --destructive-foreground: 0.98 0 0;
+        --border: 0.28 0.02 285;
+        --input: 0.28 0.02 285;
+        --ring: 0.68 0.22 285;
+        --chart-1: 0.6 0.2 285;
+        --chart-2: 0.65 0.18 240;
+        --chart-3: 0.7 0.15 200;
+        --chart-4: 0.75 0.12 160;
+        --chart-5: 0.8 0.1 120;
+    }
+
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+
+@layer components {
+    /* Action button style: black text on pure white background with visible shadows */
+    /* Works consistently in both light and dark modes */
+    .btn-action {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1) !important;
+        @apply transition-all duration-200;
+        @apply focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
+        @apply font-semibold;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-action:hover:not(:disabled) {
+        background-color: #f5f5f5 !important;
+        box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1) !important;
+    }
+
+    .btn-action:disabled {
+        background-color: #ffffff !important;
+        color: #9ca3af !important;
+        opacity: 0.6;
+        cursor: not-allowed;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    /* Ensure consistent styling in dark mode - force white background */
+    .dark .btn-action {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.3) !important;
+    }
+
+    .dark .btn-action:hover:not(:disabled) {
+        background-color: #f5f5f5 !important;
+        box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.3) !important;
+    }
+
+    .dark .btn-action:disabled {
+        background-color: #ffffff !important;
+        color: #9ca3af !important;
+    }
+}
+
