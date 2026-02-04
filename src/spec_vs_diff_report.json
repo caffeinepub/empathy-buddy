@@ -1,0 +1,50 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-04T23:21:37.070Z",
+  "summary": "The diff introduces documentation and metadata for a Version 17 deployment, but it also includes application code changes (frontend and backend), which violates the “deployment only / no functionality changes” constraint. Additionally, there is no evidence in the diff that Version 17 was actually deployed and made active, nor that a live URL was provided/confirmed.",
+  "missing_requirements": [
+    {
+      "id": "REQ-1",
+      "requirement": "Publish/deploy application Version 17 to the live environment (production) and make it the active version users see.",
+      "reason": "The diff only adds a deployment runbook and a deployment-info metadata file; it does not provide evidence of an actual production deployment (e.g., release config, CI/CD changes, or confirmation artifacts) or that Version 17 is now the active version served to users.",
+      "evidence": [
+        "frontend/DEPLOYMENT.md",
+        "frontend/public/deployment-info.json"
+      ]
+    },
+    {
+      "id": "REQ-1",
+      "requirement": "Provide a live URL (or confirmation of the existing live URL) for verification.",
+      "reason": "The deployment metadata explicitly leaves the live URL unconfirmed (placeholder text), and no other file in the diff summary provides/confirm a production URL.",
+      "evidence": [
+        "frontend/public/deployment-info.json"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Backend application logic changes in backend/main.mo despite the request being deployment-only with no application functionality/code modifications.",
+      "reason": "The BuildRequest explicitly constrains changes to deployment only; modifying backend code is out of scope and risks functionality changes.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "description": "Frontend authentication hook changes (useInternetIdentity.ts) despite the request being deployment-only with no application functionality/code modifications.",
+      "reason": "The BuildRequest explicitly constrains changes to deployment only; modifying frontend code is out of scope and risks functionality changes.",
+      "evidence": [
+        "frontend/src/hooks/useInternetIdentity.ts"
+      ]
+    }
+  ],
+  "confidence": 0.78,
+  "changed_files": [
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/DEPLOYMENT.md",
+    "frontend/public/deployment-info.json",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "project_state.json"
+  ]
+}

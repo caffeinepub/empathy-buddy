@@ -1,0 +1,168 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 4,
+  "summary": "Empathy Buddy is a web app + ICP (Internet Computer) canister backend that supports an anonymous “empathy ritual”: users record short voice expressions and specify what kind of empathy they want (Presence, Reflection, Needs Guessing). Other users can be assigned a safe, pending expression to listen to, then respond (either with a voice response or by acknowledging silent presence). Audio blobs are handled via an ExternalBlob integration with a blob-storage mixin, and the frontend uses TanStack Router + React Query for navigation and backend interactions.",
+  "existing_features": [
+    {
+      "id": "IF-1",
+      "title": "App routing and shared layout (Header/Footer)",
+      "synonyms": [
+        "TanStack Router setup",
+        "SPA navigation"
+      ],
+      "description": "Defines routes for onboarding (/), home (/home), express (/express), listen (/listen), and archive (/archive) using TanStack Router, wrapped in a shared Layout that renders a Header, main container, and Footer.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-2",
+      "title": "Onboarding with language selection",
+      "synonyms": [
+        "Welcome screen",
+        "Language dropdown"
+      ],
+      "description": "Provides an onboarding page explaining the empathy ritual and allowing the user to select a UI language (selection stored locally in component state) before navigating to Home.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-3",
+      "title": "Audio recording with preview and re-record",
+      "synonyms": [
+        "MediaRecorder capture",
+        "Voice recorder component"
+      ],
+      "description": "Implements an AudioRecorder component using MediaRecorder (webm/opus) with a max-duration timer, progress bar, preview playback, and re-record functionality while preserving the original recorded Blob for upload.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-4",
+      "title": "Express flow: record, choose empathy request, upload with progress, moderate",
+      "synonyms": [
+        "Submit expression",
+        "Upload expression"
+      ],
+      "description": "ExpressTab guides users to record up to 60s of audio, select an EmpathyType (Presence/Reflection/Needs Guessing), upload via ExternalBlob with upload-progress UI, then perform a moderation step and show success/rejection states with automatic navigation back to Home.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-5",
+      "title": "Listen flow: assign random safe expression and enforce listen-before-respond",
+      "synonyms": [
+        "Get expression",
+        "Listening session"
+      ],
+      "description": "ListenTab requests a random available expression from the backend, displays empathy guidance based on the expression’s EmpathyType, requires at least one completed playback before enabling response controls, and limits playback to three completed listens before prompting the user to respond.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-6",
+      "title": "Audio playback for ExternalBlob with resilient error UI",
+      "synonyms": [
+        "AudioPlayer",
+        "Playback controls"
+      ],
+      "description": "Loads and plays audio from an ExternalBlob direct URL with play/pause controls, progress display, and error messaging that only appears after user-initiated playback fails (avoids premature error rendering).",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-7",
+      "title": "Respond to expression (voice response or presence acknowledgment)",
+      "synonyms": [
+        "Submit response",
+        "Empathy response"
+      ],
+      "description": "After listening, users can either record and upload a voice response (for Reflection/Needs Guessing) or mark a “presence” completion (for Silent Presence), then see a success message and return to Home.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-8",
+      "title": "Internet Identity integration and authenticated/anonymous actor creation",
+      "synonyms": [
+        "II auth",
+        "Actor hook"
+      ],
+      "description": "Provides an InternetIdentityProvider (AuthClient-based) for login/logout and a useActor hook that creates an authenticated actor when identity is present or an anonymous actor otherwise; dependent queries are invalidated/refetched when the actor changes.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-9",
+      "title": "React Query hooks for backend mutations and cache invalidation",
+      "synonyms": [
+        "useUploadExpression",
+        "useAssignExpression",
+        "useRespondToExpression",
+        "useModerateExpression"
+      ],
+      "description": "Encapsulates backend calls as React Query mutations (upload expression, moderate, assign random expression, respond), and invalidates relevant caches on success (expressions/responses).",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-10",
+      "title": "Backend canister: expression upload, moderation, assignment, and response lifecycle",
+      "synonyms": [
+        "Motoko backend",
+        "Expressions/Responses API"
+      ],
+      "description": "Implements Motoko canister methods to upload expressions (with EmpathyType), moderate expressions, assign a random safe pending expression (excluding caller where possible), create responses and mark expressions completed, plus query endpoints to fetch an expression/response and list available safe pending expressions.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-11",
+      "title": "Blob storage mixin integration (ExternalBlob) with authorization and maintenance APIs",
+      "synonyms": [
+        "caffeine storage mixin",
+        "blob GC helpers"
+      ],
+      "description": "Includes a blob-storage mixin providing ExternalBlob support plus maintenance endpoints for updating authorized gateway principals, listing blobs eligible for deletion, confirming deletion and triggering GC, and cashier cycles refill/top-up via an env-configured cashier principal.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "feature-publish-deploy-application-version-17-to-the-live-environment-production-and-make-it-the-active-version-users-see",
+      "title": "Publish/deploy application Version 17 to the live environment (production) and make it the active version users see.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [],
+  "architectural_notes": [
+    "Frontend is a React SPA using TanStack Router for routing and @tanstack/react-query for server-state/mutations and cache invalidation.",
+    "Authentication/identity is handled via an Internet Identity provider (AuthClient), with an anonymous actor fallback when not authenticated.",
+    "Backend is a Motoko canister with in-memory Maps for expressions/responses and includes a blob-storage mixin for ExternalBlob support and blob lifecycle operations.",
+    "Domain model uses explicit status enums for expressions (pending/assigned/completed/rejected) and moderation (unchecked/safe/unsafe), with timestamp updates on modifications.",
+    "Audio upload/playback uses ExternalBlob abstractions: upload from bytes with optional upload-progress callback; playback via a direct URL derived from ExternalBlob.",
+    "Frontend “Express” and “Listen” flows are implemented as stateful tab components (ExpressTab/ListenTab) with explicit UI state machines (idle/uploading/moderating/success/etc.).",
+    "UI built with Tailwind CSS (OKLCH theme variables) and component primitives (e.g., shadcn-style Button/Card/Alert patterns).",
+    "Blob-storage module includes authorization-gateway principal syncing and a cashier cycles top-up/refill mechanism via an env var configured principal.",
+    "React Query pattern: mutations invalidate relevant query keys (e.g., expressions/responses) to keep UI consistent after writes.",
+    "Media recording uses the browser MediaRecorder API with webm/opus and preserves the original blob throughout preview and upload (no re-encoding)."
+  ],
+  "known_issues": [
+    "Backend Maps (expressionsMap/responsesMap) are not stable across canister upgrades; data will be lost unless converted to stable storage.",
+    "Moderation is not access-controlled in the backend (any caller can call moderateExpression/reviewAndAssign).",
+    "Frontend moderation is simulated with randomness (simulateModerationCheck); no real moderation service integration.",
+    "Archive page is a placeholder; no listing/history UI is implemented.",
+    "assignRandomExpression takes a Principal argument that is ignored; frontend passes Principal.anonymous() while backend relies on caller identity instead.",
+    "Potential off-by-one risk when selecting randomIndex using natRange(0, eligibleExpressions.size()) depending on natRange semantics (could produce size and cause out-of-bounds).",
+    "Expression lifecycle does not currently implement rejection status transitions (backend defines #rejected but never sets it).",
+    "React Query QueryClientProvider is instantiated in both main.tsx and App.tsx (nested providers with separate clients), which can lead to confusing cache behavior.",
+    "AudioPlayer keeps the created Audio element around after successful load (by design); URL revocation/cleanup is limited and could cause minor resource leaks over time.",
+    "Blob-storage authorization list requires manual update via _caffeineStorageUpdateGatewayPrincipals; no automatic refresh is evident."
+  ],
+  "isFixRequest": false,
+  "gameProjectType": "none",
+  "projectName": "Empathy Buddy",
+  "clarification_mode": "pro",
+  "clarification_rounds": 0
+}

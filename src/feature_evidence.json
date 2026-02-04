@@ -1,0 +1,25 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-publish-deploy-application-version-17-to-the-live-environment-production-and-make-it-the-active-version-users-see",
+      "featureTitle": "Publish/deploy application Version 17 to the live environment (production) and make it the active version users see.",
+      "files": [
+        "frontend/DEPLOYMENT.md",
+        "frontend/public/deployment-info.json"
+      ],
+      "components": [
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

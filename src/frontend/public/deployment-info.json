@@ -1,0 +1,18 @@
+{
+  "version": "17",
+  "deploymentTimestamp": null,
+  "deployedBy": "pending",
+  "environment": "production",
+  "status": "ready-for-deployment",
+  "notes": "Version 17 deployment - no functionality changes, deployment only",
+  "liveURL": "To be confirmed after deployment",
+  "lastVerified": null,
+  "changelog": [
+    {
+      "version": "17",
+      "date": "2026-02-04",
+      "type": "deployment",
+      "description": "Publishing Version 17 to production environment"
+    }
+  ]
+}

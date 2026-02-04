@@ -13,5 +13,7 @@
   "frontend/src/pages/Home.tsx": "Home screen with central question and three navigation buttons (Express, Listen, Archive) serving as the main routing hub.",
   "frontend/src/pages/Express.tsx": "Express page that integrates the fully functional ExpressTab component with back navigation to home, providing complete audio recording, upload, and moderation functionality.",
   "frontend/src/pages/Listen.tsx": "Listen page that integrates the fully functional ListenTab component with back navigation to home, providing complete audio playback, assignment, and response functionality.",
-  "frontend/src/pages/Archive.tsx": "Placeholder page for Archive view with back navigation to home."
+  "frontend/src/pages/Archive.tsx": "Placeholder page for Archive view with back navigation to home.",
+  "frontend/DEPLOYMENT.md": "Deployment runbook documenting the step-by-step process for deploying Version 17 to production on the Internet Computer, including prerequisites, deployment steps, verification procedures, and rollback instructions.",
+  "frontend/public/deployment-info.json": "Static metadata file tracking deployment version (17), status, and changelog for production deployment verification and documentation purposes."
 }

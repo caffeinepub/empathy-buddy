@@ -3,12 +3,10 @@ import Map "mo:core/Map";
 import Array "mo:core/Array";
 import Text "mo:core/Text";
 import Principal "mo:core/Principal";
-
 import Random "mo:core/Random";
-import Time "mo:core/Time";
 import Runtime "mo:core/Runtime";
+import Time "mo:core/Time";
 import MixinStorage "blob-storage/Mixin";
-
 
 actor {
   include MixinStorage();

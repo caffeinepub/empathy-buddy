@@ -1,0 +1,36 @@
+{
+  "kind": "build_request",
+  "title": "Publish Version 17 to Live",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Publish/deploy application Version 17 to the live environment (production) and make it the active version users see.",
+      "target": "unknown",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "could you push version 17 publish it to live?"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Version 17 is deployed to the live environment and is the active version served to users",
+        "A live URL (or confirmation of the existing live URL) is provided for verification"
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not modify application functionality or code as part of this request; deployment only."
+  ],
+  "nonGoals": [
+    "Implementing new features or UI changes",
+    "Backend schema/data migrations",
+    "Fixing known issues unless required for the deployment to succeed"
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

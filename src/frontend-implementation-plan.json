@@ -1,0 +1,27 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Deploy Version 17 to Production (Deployment-Only)",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Publish/deploy application Version 17 to the live environment and ensure it is the active version served to users.",
+      "acceptanceCriteria": [
+        "Version 17 is deployed to the live environment and is the active version served to users",
+        "A live URL (or confirmation of the existing live URL) is provided for verification"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/DEPLOYMENT.md",
+          "operation": "create",
+          "description": "Add deployment-only runbook for promoting Version 17 to the live environment, using the repository’s existing deployment tooling. Use the github-export-icp-cli component to support production deployment workflow (Verify the component's usage instructions before implementing). Ensure the runbook explicitly states no application functionality/code changes are part of this request."
+        },
+        {
+          "path": "frontend/public/deployment-info.json",
+          "operation": "create",
+          "description": "Add a small static metadata file to record the deployed version label (Version 17), deployment timestamp, and the confirmed live URL for verification. This is a documentation/verification artifact only and must not change application behavior."
+        }
+      ]
+    }
+  ]
+}
